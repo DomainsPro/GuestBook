@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自适应背景图片设计</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            /* 关键：背景图片自适应设置 */
+            background-image: url('https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            
+            /* 保留原有布局 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 50px 20px;
+            
+            /* 添加深色遮罩提升文字可读性 */
+            position: relative;
+        }
+        
+        /* 背景遮罩层 */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+        
+        .container {
+            max-width: 680px;
+            width: 100%;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .feature {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature h3 {
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .feature p {
+            color: #34495e;
+            line-height: 1.6;
+        }
+        
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 25px 0;
+            overflow-x: auto;
+        }
+        
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #34495e;
+        }
+        
+        .code-title {
+            font-size: 1.1rem;
+            color: #3498db;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
+        
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 30px 15px;
+            }
+            
+            .container {
+                padding: 30px 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>背景图片自适应技术</h1>
+            <p class="subtitle">响应式设计 | 完美适配所有设备</p>
+        </header>
+        
+        <div class="features">
+            <div class="feature">
+                <h3>无缝自适应</h3>
+                <p>背景图片自动适应不同屏幕尺寸，无论桌面、平板还是手机，都能完美展示，无需担心变形或裁剪问题。</p>
+            </div>
+            <div class="feature">
+                <h3>高性能渲染</h3>
+                <p>使用优化的CSS属性确保背景加载流畅，不阻塞页面渲染，提供更好的用户体验。</p>
+            </div>
+            <div class="feature">
+                <h3>优雅降级</h3>
+                <p>即使在老旧浏览器中，也能提供可接受的展示效果，确保所有用户都能访问内容。</p>
+            </div>
+        </div>
+        
+        <div class="code-block">
+            <div class="code-header">
+                <div class="code-title">CSS背景自适应代码</div>
+            </div>
+            <pre><code>body {
+  background-image: url('background.jpg');
+  background-size: cover;      /* 覆盖整个容器 */
+  background-position: center; /* 图片居中显示 */
+  background-repeat: no-repeat; /* 不重复图片 */
+  background-attachment: fixed; /* 固定背景不滚动 */
+  
+  /* 备用背景颜色 */
+  background-color: #f0f0f0;
+  
+  /* 确保元素占满整个视口高度 */
+  min-height: 100vh;
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  body {
+    background-size: contain; /* 在小屏幕上完整显示图片 */
+  }
+}</code></pre>
+        </div>
+        
+        <div class="btn-container">
+            <button class="btn">查看演示</button>
+            <button class="btn">下载源码</button>
+        </div>
+        
+        <footer>
+            <p>© 2023 自适应背景设计 | 在任何设备上完美展示背景图片</p>
+        </footer>
+    </div>
+</body>
+</html>
