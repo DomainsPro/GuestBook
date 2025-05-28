@@ -96,11 +96,11 @@
             border-radius: 50%;
             background: rgba(106, 90, 205, 0.1);
             transition: all 0.3s ease;
+            position: relative;
         }
         
         .theme-switch:hover {
             background: rgba(106, 90, 205, 0.2);
-            transform: rotate(15deg);
         }
         
         .container-main {
@@ -293,34 +293,6 @@
             opacity: 0.7;
         }
         
-        /* 装饰元素 */
-        .decoration {
-            position: absolute;
-            z-index: 5;
-            opacity: 0.1;
-            transition: opacity 0.5s ease;
-        }
-        
-        .circle {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            border: 2px solid var(--primary-color);
-            top: -50px;
-            right: -50px;
-        }
-        
-        .triangle {
-            width: 0;
-            height: 0;
-            border-left: 100px solid transparent;
-            border-right: 100px solid transparent;
-            border-bottom: 170px solid var(--secondary-color);
-            bottom: -80px;
-            left: -80px;
-            transform: rotate(45deg);
-        }
-        
         /* 响应式调整 */
         @media (max-width: 768px) {
             .container-main {
@@ -394,52 +366,39 @@
             }
         }
         
-        /* 夜间模式切换动画 */
-        .moon, .sun {
-            transition: transform 0.5s ease, opacity 0.5s ease;
-        }
-        
-        .sun {
-            position: absolute;
-        }
-        
-        [data-bs-theme="dark"] .moon {
-            transform: rotate(360deg);
-            opacity: 1;
-        }
-        
-        [data-bs-theme="dark"] .sun {
-            transform: rotate(180deg);
-            opacity: 0;
-        }
-        
-        [data-bs-theme="light"] .moon {
-            transform: rotate(180deg);
-            opacity: 0;
-        }
-        
-        [data-bs-theme="light"] .sun {
-            transform: rotate(0deg);
-            opacity: 1;
-        }
-        
+        /* 夜间模式切换图标动画 */
         .theme-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
             position: relative;
             width: 24px;
             height: 24px;
+        }
+        
+        .moon, .sun {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.3s ease, transform 0.5s ease;
+        }
+        
+        .moon {
+            opacity: 0;
+            transform: rotate(-30deg);
+        }
+        
+        [data-bs-theme="dark"] .sun {
+            opacity: 0;
+            transform: rotate(90deg);
+        }
+        
+        [data-bs-theme="dark"] .moon {
+            opacity: 1;
+            transform: rotate(0deg);
         }
     </style>
 </head>
 <body>
     <!-- 背景遮罩 -->
     <div class="overlay"></div>
-    
-    <!-- 装饰元素 -->
-    <div class="decoration circle"></div>
-    <div class="decoration triangle"></div>
     
     <!-- 导航栏 -->
     <nav class="navbar navbar-expand-lg">
