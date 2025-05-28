@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上官云雀 - 个人主页</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a5acd;
+            --secondary-color: #b19cd9;
+            --text-color: #5a5a72;
+            --light-bg: rgba(255, 255, 255, 0.92);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --border-color: rgba(230, 230, 245, 0.8);
+            --shadow-color: rgba(106, 90, 205, 0.08);
+            --hover-shadow: rgba(106, 90, 205, 0.15);
+        }
+        
+        [data-bs-theme="dark"] {
+            --primary-color: #9d8cff;
+            --secondary-color: #c7b3ff;
+            --text-color: #d0d0e1;
+            --light-bg: rgba(30, 30, 40, 0.92);
+            --card-bg: rgba(35, 35, 50, 0.95);
+            --nav-bg: rgba(25, 25, 35, 0.95);
+            --border-color: rgba(70, 70, 90, 0.8);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --hover-shadow: rgba(106, 90, 205, 0.25);
+        }
+        
+        body {
+            background: url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text-color);
+            min-height: 100vh;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            position: relative;
+            transition: background-color 0.5s ease;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: -1;
+            transition: background-color 0.5s ease;
+        }
+        
+        [data-bs-theme="dark"] .overlay {
+            background: rgba(10, 10, 20, 0.85);
+        }
+        
+        .navbar {
+            background: var(--nav-bg) !important;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 15px 15px;
+            padding: 10px 20px;
+            transition: all 0.5s ease;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--text-color) !important;
+            font-weight: 500;
+            margin: 0 8px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(106, 90, 205, 0.1);
+            color: var(--primary-color) !important;
+        }
+        
+        .theme-switch {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(106, 90, 205, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .theme-switch:hover {
+            background: rgba(106, 90, 205, 0.2);
+            transform: rotate(15deg);
+        }
+        
+        .container-main {
+            max-width: 800px;
+            background: var(--light-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            padding: 40px 30px;
+            margin: 30px auto;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(2px);
+            position: relative;
+            z-index: 10;
+            transition: all 0.5s ease;
+        }
+        
+        .profile-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .avatar-container {
+            margin: 0 auto 25px;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 5px 20px var(--shadow-color);
+        }
+        
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--light-bg);
+        }
+        
+        .name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .name::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        
+        .bio {
+            font-size: 1.3rem;
+            color: var(--text-color);
+            margin: 25px auto 30px;
+            max-width: 80%;
+            font-style: italic;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(106, 90, 205, 0.1);
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px var(--shadow-color);
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            background: rgba(106, 90, 205, 0.2);
+            box-shadow: 0 5px 15px var(--hover-shadow);
+            transform: translateY(-3px);
+        }
+        
+        .link-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+        
+        .link-card:hover {
+            background: var(--card-bg);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 25px var(--hover-shadow);
+        }
+        
+        .link-card a {
+            display: flex;
+            align-items: center;
+            padding: 18px 25px;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+        
+        .link-icon {
+            width: 36px;
+            height: 36px;
+            margin-right: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            transition: all 0.3s ease;
+            background: rgba(106, 90, 205, 0.1);
+            border-radius: 10px;
+            color: var(--primary-color);
+        }
+        
+        .link-card:hover .link-icon {
+            background: rgba(106, 90, 205, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .link-text {
+            font-size: 1.3rem;
+            font-weight: 500;
+            flex: 1;
+        }
+        
+        .link-arrow {
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+        }
+        
+        .link-card:hover .link-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .beian-section {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .beian-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background: rgba(106, 90, 205, 0.1);
+            opacity: 0.8;
+        }
+        
+        .beian-link:hover {
+            color: var(--primary-color);
+            background: rgba(106, 90, 205, 0.2);
+            text-decoration: none;
+            opacity: 1;
+        }
+        
+        .quote {
+            font-size: 1.1rem;
+            text-align: center;
+            margin-top: 15px;
+            color: var(--text-color);
+            font-style: italic;
+            opacity: 0.7;
+        }
+        
+        /* 装饰元素 */
+        .decoration {
+            position: absolute;
+            z-index: 5;
+            opacity: 0.1;
+            transition: opacity 0.5s ease;
+        }
+        
+        .circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+            top: -50px;
+            right: -50px;
+        }
+        
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 170px solid var(--secondary-color);
+            bottom: -80px;
+            left: -80px;
+            transform: rotate(45deg);
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+            
+            .avatar-container {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .name {
+                font-size: 2.2rem;
+            }
+            
+            .bio {
+                font-size: 1.2rem;
+            }
+            
+            .link-card a {
+                padding: 16px 20px;
+            }
+            
+            .link-text {
+                font-size: 1.2rem;
+            }
+            
+            .link-icon {
+                font-size: 1.4rem;
+                width: 32px;
+                height: 32px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .avatar-container {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .name {
+                font-size: 1.8rem;
+            }
+            
+            .bio {
+                font-size: 1.1rem;
+                max-width: 95%;
+            }
+            
+            .link-text {
+                font-size: 1.1rem;
+            }
+            
+            .social-icons {
+                gap: 15px;
+            }
+            
+            .social-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1.1rem;
+            }
+            
+            .navbar {
+                padding: 10px 15px;
+            }
+            
+            .navbar-brand {
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* 夜间模式切换动画 */
+        .moon, .sun {
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        
+        .sun {
+            position: absolute;
+        }
+        
+        [data-bs-theme="dark"] .moon {
+            transform: rotate(360deg);
+            opacity: 1;
+        }
+        
+        [data-bs-theme="dark"] .sun {
+            transform: rotate(180deg);
+            opacity: 0;
+        }
+        
+        [data-bs-theme="light"] .moon {
+            transform: rotate(180deg);
+            opacity: 0;
+        }
+        
+        [data-bs-theme="light"] .sun {
+            transform: rotate(0deg);
+            opacity: 1;
+        }
+        
+        .theme-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景遮罩 -->
+    <div class="overlay"></div>
+    
+    <!-- 装饰元素 -->
+    <div class="decoration circle"></div>
+    <div class="decoration triangle"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-dove me-2"></i>上官云雀
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto me-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-home me-1"></i> 首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-user me-1"></i> 关于</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-project-diagram me-1"></i> 项目</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-file-alt me-1"></i> 博客</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-envelope me-1"></i> 联系</a>
+                    </li>
+                </ul>
+                
+                <div class="theme-switch" id="themeSwitch">
+                    <div class="theme-icon">
+                        <i class="fas fa-sun sun"></i>
+                        <i class="fas fa-moon moon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 主容器 -->
+    <div class="container container-main">
+        <!-- 个人资料区域 -->
+        <div class="profile-section">
+            <div class="avatar-container">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="上官云雀" class="avatar">
+            </div>
+            <h1 class="name">上官云雀</h1>
+            <p class="bio">晚上不睡，白天不起，三十入棺</p>
+            
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        
+        <!-- 链接卡片区域 -->
+        <div class="row g-3">
+            <div class="col-12">
+                <div class="link-card">
+                    <a href="https://github.com/maajiko/Guide-page.git" target="_blank">
+                        <div class="link-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <span class="link-text">GitHub 仓库</span>
+                        <span class="link-arrow"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-12">
+                <div class="link-card">
+                    <a href="https://github.com/maajiko/Guide-page.git" target="_blank">
+                        <div class="link-icon">
+                            <i class="fas fa-blog"></i>
+                        </div>
+                        <span class="link-text">技术博客</span>
+                        <span class="link-arrow"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-12">
+                <div class="link-card">
+                    <a href="https://t.me/maajiko" target="_blank">
+                        <div class="link-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <span class="link-text">Telegram 频道</span>
+                        <span class="link-arrow"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-12">
+                <div class="link-card">
+                    <a href="mailto:maajikotg@gmail.com" target="_blank">
+                        <div class="link-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <span class="link-text">邮件联系</span>
+                        <span class="link-arrow"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-12">
+                <div class="link-card">
+                    <a href="https://www.deepseek.com" target="_blank">
+                        <div class="link-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <span class="link-text">DeepSeek AI</span>
+                        <span class="link-arrow"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-12">
+                <div class="link-card">
+                    <a href="https://www.android.com" target="_blank">
+                        <div class="link-icon">
+                            <i class="fab fa-android"></i>
+                        </div>
+                        <span class="link-text">Android 开发</span>
+                        <span class="link-arrow"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-12">
+                <div class="link-card">
+                    <a href="https://1panel.cn" target="_blank">
+                        <div class="link-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <span class="link-text">1Panel 控制面板</span>
+                        <span class="link-arrow"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-12">
+                <div class="link-card">
+                    <a href="https://cloudflare.com" target="_blank">
+                        <div class="link-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <span class="link-text">CloudFlare CDN</span>
+                        <span class="link-arrow"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 备案信息区域 -->
+        <div class="beian-section">
+            <a href="https://beian.miit.gov.cn/" class="beian-link" target="_blank">京ICP备2024000000号-1</a>
+            <div class="quote">「夜空中最亮的星，指引着不眠的灵魂」</div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // 夜间模式切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeSwitch = document.getElementById('themeSwitch');
+            const html = document.documentElement;
+            
+            // 检查本地存储的主题设置
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                html.setAttribute('data-bs-theme', savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                // 如果没有保存的主题，检查系统偏好
+                html.setAttribute('data-bs-theme', 'dark');
+            }
+            
+            // 切换主题
+            themeSwitch.addEventListener('click', function() {
+                const currentTheme = html.getAttribute('data-bs-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                html.setAttribute('data-bs-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+            
+            // 监听系统主题变化
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+                if (!localStorage.getItem('theme')) {
+                    const newTheme = event.matches ? 'dark' : 'light';
+                    html.setAttribute('data-bs-theme', newTheme);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
