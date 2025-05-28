@@ -248,14 +248,14 @@
             transform: translateX(0);
         }
         
-        .beian-section {
+        .section {
             text-align: center;
             margin-top: 60px;
             padding-top: 20px;
             border-top: 1px solid var(--border-color);
         }
         
-        .beian-link {
+        .a-link {
             color: var(--text-color);
             text-decoration: none;
             font-size: 1rem;
@@ -267,7 +267,7 @@
             opacity: 0.8;
         }
         
-        .beian-link:hover {
+        .a-link:hover {
             color: var(--primary-color);
             background: rgba(106, 90, 205, 0.2);
             text-decoration: none;
