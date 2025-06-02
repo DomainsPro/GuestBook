@@ -103,20 +103,20 @@
             }
         }
 
-        .beian {
+        .footer {
             text-align: center;
             margin-top: 100px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        .beian a {
+        .footer a {
             color: #86868b;
             text-decoration: none;
             font-size: 14px;
             transition: all 0.2s ease;
         }
 
-        .beian a:hover {
+        .footer a:hover {
             color: #1d1d1f;
             transform: scale(1.02);
         }
