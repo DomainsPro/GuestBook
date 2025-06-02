@@ -20,9 +20,9 @@
 - JavaScript
 - Lottie Web (用于动画)
 
-## 预览
+## 预览 
 
-在线预览：[https://aa.slte.me](https://aa.slte.me)
+在线预览： https://github.com/maajiko/Guide-page
 
 ## 安装使用
 
