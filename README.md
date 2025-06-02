@@ -1,7 +1,5 @@
 # 个人主页
 
-![项目预览](https://raw.githubusercontent.com/maajiko/Guide-page/main/assets/icons/md01.png)
-
 ## 项目简介
 
 这是一个简约而现代的个人主页项目，采用响应式设计，完美适配各种设备屏幕。页面以卡片式布局展示个人信息和社交媒体链接，并集成了Lottie动画作为头像，带来独特的视觉体验。
